@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de productos</title>
+    <link rel="stylesheet" href="static/estilo_index.css">
+</head>
+<body>
+    <div class="info-container">
+        <h2>SEGUNDO PARCIAL TEM-742</h2>
+        <p>Nombre: Carlos Alberto Kalla Rodriguez</p>
+        <p>Carnet: 12484987 LP</p>
+    </div>
+
+    <h1>Gestión de productos</h1>
+    <a href="{{ url_for('nuevo_producto') }}" class="nuevo-btn">Nuevo Producto</a>
+    
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Fecha Vencimiento</th>
+            <th>Categoría</th>
+            <th colspan="2">Acciones</th>
+        </tr>
+        {% for item in productos %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.precio }}</td>
+            <td>{{ item.fecha_vencimiento }}</td>
+            <td>{{ item.categoria }}</td>
+            <td><a href="{{ url_for('editar', id=item.id) }}" class="editar-btn">Editar</a></td>
+            <td>
+                <form action="{{ url_for('eliminar', id=item.id) }}" method="POST">
+                    <input type="submit" value="Eliminar" class="eliminar-btn">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
